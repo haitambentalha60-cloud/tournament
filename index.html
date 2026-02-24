@@ -21,6 +21,111 @@ body{background:var(--ui-bg);color:var(--ui-text);font-family:'Inter',sans-serif
 .tab-btn.active{background:var(--ui-accent);color:#fff;box-shadow:0 0 12px rgba(59,130,246,0.4);}
 .btn-download{background:linear-gradient(135deg,var(--neon2),var(--neon));border:none;color:#020B18;font-family:'Orbitron',sans-serif;font-size:0.52rem;font-weight:700;letter-spacing:2px;padding:7px 16px;border-radius:8px;cursor:pointer;text-transform:uppercase;box-shadow:0 0 20px rgba(0,240,255,0.3);transition:all 0.2s;white-space:nowrap;flex-shrink:0;}
 .btn-download:hover{transform:translateY(-1px);box-shadow:0 0 30px rgba(0,240,255,0.5);}
+.btn-play{background:linear-gradient(135deg,#7C3AED,#A855F7);border:none;color:#fff;font-family:'Orbitron',sans-serif;font-size:0.52rem;font-weight:700;letter-spacing:2px;padding:7px 16px;border-radius:8px;cursor:pointer;text-transform:uppercase;box-shadow:0 0 20px rgba(168,85,247,0.4);transition:all 0.2s;white-space:nowrap;flex-shrink:0;}
+.btn-play:hover{transform:translateY(-1px);box-shadow:0 0 30px rgba(168,85,247,0.6);}
+.btn-play.recording{background:linear-gradient(135deg,#DC2626,#EF4444);box-shadow:0 0 20px rgba(239,68,68,0.5);animation:recpulse 1s infinite;}
+@keyframes recpulse{0%,100%{box-shadow:0 0 20px rgba(239,68,68,0.5);}50%{box-shadow:0 0 35px rgba(239,68,68,0.9);}}
+
+/* ── ANIMATION OVERLAY ── */
+.anim-countdown{position:fixed;inset:0;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;background:rgba(2,11,24,0.96);backdrop-filter:blur(12px);}
+.anim-countdown-num{font-family:'Bebas Neue',sans-serif;font-size:9rem;line-height:1;color:#00F0FF;text-shadow:0 0 60px rgba(0,240,255,0.9),0 0 120px rgba(0,240,255,0.4);animation:countbig 1s cubic-bezier(.22,1,.36,1);}
+@keyframes countbig{0%{transform:scale(2.5);opacity:0;}50%{opacity:1;}100%{transform:scale(1);opacity:1;}}
+.anim-countdown-lbl{font-family:'Orbitron',sans-serif;font-size:0.55rem;letter-spacing:8px;color:rgba(0,240,255,0.5);margin-top:12px;text-transform:uppercase;}
+.anim-hint{font-family:'Orbitron',sans-serif;font-size:0.46rem;letter-spacing:3px;color:rgba(255,255,255,0.3);margin-top:20px;}
+.anim-hint-rec{display:inline-block;width:8px;height:8px;border-radius:50%;background:#EF4444;margin-right:6px;animation:recpulse2 1.2s infinite;vertical-align:middle;}
+@keyframes recpulse2{0%,100%{opacity:1;transform:scale(1);}50%{opacity:0.3;transform:scale(0.7);}}
+
+/* ── CINEMATIC KEYFRAMES ── */
+/* Slow elegant fade up — main workhorse */
+@keyframes fadeUpSlow{
+  0%{opacity:0;transform:translateY(40px);}
+  100%{opacity:1;transform:translateY(0);}
+}
+/* Fade down from above */
+@keyframes fadeDownSlow{
+  0%{opacity:0;transform:translateY(-36px);}
+  100%{opacity:1;transform:translateY(0);}
+}
+/* Slide in from left with blur */
+@keyframes slideFromLeft{
+  0%{opacity:0;transform:translateX(-60px);filter:blur(4px);}
+  60%{filter:blur(0);}
+  100%{opacity:1;transform:translateX(0);filter:blur(0);}
+}
+/* Slide in from right with blur */
+@keyframes slideFromRight{
+  0%{opacity:0;transform:translateX(60px);filter:blur(4px);}
+  60%{filter:blur(0);}
+  100%{opacity:1;transform:translateX(0);filter:blur(0);}
+}
+/* Score cinematic — drops from sky, slight bounce */
+@keyframes scoreDrop{
+  0%{opacity:0;transform:translateY(-80px) scale(1.4);}
+  55%{opacity:1;transform:translateY(8px) scale(0.96);}
+  75%{transform:translateY(-4px) scale(1.02);}
+  100%{opacity:1;transform:translateY(0) scale(1);}
+}
+/* Scale from center with soft glow burst */
+@keyframes scaleReveal{
+  0%{opacity:0;transform:scale(0.5);filter:blur(6px);}
+  50%{filter:blur(0);}
+  70%{transform:scale(1.04);}
+  100%{opacity:1;transform:scale(1);filter:blur(0);}
+}
+/* Standings row — left sweep, staggered */
+@keyframes rowSweep{
+  0%{opacity:0;transform:translateX(-80px);filter:blur(3px);}
+  60%{filter:blur(0);}
+  100%{opacity:1;transform:translateX(0);}
+}
+/* Card rises slowly */
+@keyframes cardRise{
+  0%{opacity:0;transform:translateY(50px) scale(0.94);}
+  70%{transform:translateY(-4px) scale(1.01);}
+  100%{opacity:1;transform:translateY(0) scale(1);}
+}
+/* Neon line wipe left→right */
+@keyframes lineWipe{
+  0%{transform:scaleX(0);transform-origin:left;opacity:0;}
+  20%{opacity:1;}
+  100%{transform:scaleX(1);transform-origin:left;opacity:1;}
+}
+/* Trophy entrance — dramatic spin + scale */
+@keyframes trophyEntrance{
+  0%{opacity:0;transform:scale(0) rotate(-30deg);}
+  50%{opacity:1;transform:scale(1.25) rotate(6deg);}
+  70%{transform:scale(0.92) rotate(-3deg);}
+  85%{transform:scale(1.05) rotate(1deg);}
+  100%{opacity:1;transform:scale(1) rotate(0);}
+}
+/* Soft neon pulse (badge) */
+@keyframes neonPulse{
+  0%{opacity:0;filter:blur(8px);}
+  40%{opacity:1;filter:blur(0);}
+  60%{filter:blur(1px);}
+  80%{filter:blur(0);}
+  100%{opacity:1;filter:blur(0);}
+}
+/* Whole slide fade in from black */
+@keyframes slideFadeIn{
+  0%{opacity:0;}
+  100%{opacity:1;}
+}
+
+/* ── ANIMATION UTILITY CLASSES ── */
+.anim-fade-up   {animation:fadeUpSlow    1.0s cubic-bezier(.16,1,.3,1) both;}
+.anim-fade-down {animation:fadeDownSlow  1.0s cubic-bezier(.16,1,.3,1) both;}
+.anim-fade-left {animation:slideFromLeft 1.0s cubic-bezier(.16,1,.3,1) both;}
+.anim-fade-right{animation:slideFromRight 1.0s cubic-bezier(.16,1,.3,1) both;}
+.anim-scale-in  {animation:scaleReveal   1.1s cubic-bezier(.16,1,.3,1) both;}
+.anim-score-pop {animation:scoreDrop     1.2s cubic-bezier(.16,1,.3,1) both;}
+.anim-slide-row {animation:rowSweep      0.9s cubic-bezier(.16,1,.3,1) both;}
+.anim-card-reveal{animation:cardRise     1.0s cubic-bezier(.16,1,.3,1) both;}
+.anim-neon-flicker{animation:neonPulse   1.0s cubic-bezier(.16,1,.3,1) both;}
+.anim-trophy    {animation:trophyEntrance 1.3s cubic-bezier(.16,1,.3,1) both;}
+.anim-wipe      {animation:lineWipe      1.2s cubic-bezier(.16,1,.3,1) both;}
+.anim-wipe-full {animation:lineWipe      1.2s cubic-bezier(.16,1,.3,1) both;}
+.anim-slide-in  {animation:slideFadeIn   0.8s ease both;}
 
 /* LAYOUT */
 .main{display:flex;flex:1;overflow:hidden;}
@@ -289,6 +394,7 @@ body{background:var(--ui-bg);color:var(--ui-text);font-family:'Inter',sans-serif
     <button class="tab-btn" onclick="switchSlide('motm')">M.O.T.M</button>
     <button class="tab-btn" onclick="switchSlide('starting6')">Starting 6</button>
   </div>
+  <button class="btn-play" id="btn-play" onclick="playAnimation()">▶ ANIMER</button>
   <button class="btn-download" onclick="downloadImage()">⬇ TÉLÉCHARGER</button>
 </div>
 
@@ -1172,6 +1278,460 @@ async function downloadImage(){
 
 function v(id){return document.getElementById(id)?.value||'';}
 function setText(id,txt){const el=document.getElementById(id);if(el)el.textContent=txt;}
+
+// ════════════════════════════════════════════════════════════
+// ▶  CINEMATIC ANIMATION ENGINE  — slow, breathing, dramatic
+// ════════════════════════════════════════════════════════════
+let animating = false;
+
+// ─── core utils ───────────────────────────────────────────
+const wait = ms => new Promise(r => setTimeout(r, ms));
+
+// Hide element instantly, then add animation class after delayMs.
+// Duration controls how long before the class is removed (keeps element visible).
+function reveal(el, cls, delayMs = 0, keepMs = 2000) {
+  if (!el) return;
+  el.style.opacity = '0';
+  el.style.visibility = 'hidden';
+  setTimeout(() => {
+    el.style.visibility = '';
+    el.style.opacity = '';
+    el.classList.remove(cls);
+    void el.offsetWidth; // force reflow
+    el.classList.add(cls);
+    setTimeout(() => el.classList.remove(cls), keepMs);
+  }, delayMs);
+}
+
+// Hide a list of elements instantly (call before animation starts)
+function hideAll(els) {
+  els.forEach(el => {
+    if (el) { el.style.opacity = '0'; el.style.visibility = 'hidden'; }
+  });
+}
+
+// Smooth numeric count-up for a text element
+function countUp(el, targetStr, durationMs, delayMs = 0) {
+  if (!el) return;
+  const isPercent = targetStr.includes('%');
+  const isDash = targetStr.includes('–') || targetStr.includes('-');
+  if (isDash) { // score like "3 – 1" — just fade in, don't count
+    reveal(el, 'anim-score-pop', delayMs);
+    return;
+  }
+  const target = parseFloat(targetStr) || 0;
+  setTimeout(() => {
+    const start = performance.now();
+    const step = now => {
+      const p = Math.min((now - start) / durationMs, 1);
+      const eased = 1 - Math.pow(1 - p, 3); // ease-out cubic
+      el.textContent = Math.round(eased * target) + (isPercent ? '%' : '');
+      if (p < 1) requestAnimationFrame(step);
+      else el.textContent = targetStr;
+    };
+    requestAnimationFrame(step);
+  }, delayMs);
+}
+
+// ─── countdown overlay ────────────────────────────────────
+function showCountdown(n, cb) {
+  const ov = document.createElement('div');
+  ov.className = 'anim-countdown';
+  ov.innerHTML = `
+    <div class="anim-countdown-num" id="cd-num">${n}</div>
+    <div class="anim-countdown-lbl">ANIMATION DANS...</div>
+    <div class="anim-hint"><span class="anim-hint-rec"></span>LANCEZ VOTRE ENREGISTREMENT D'ÉCRAN</div>`;
+  document.body.appendChild(ov);
+  let cur = n;
+  const tick = () => {
+    cur--;
+    if (cur <= 0) { ov.remove(); cb(); return; }
+    const el = document.getElementById('cd-num');
+    if (el) {
+      el.style.animation = 'none';
+      el.textContent = cur;
+      void el.offsetWidth;
+      el.style.animation = 'countbig 1s cubic-bezier(.22,1,.36,1)';
+    }
+    setTimeout(tick, 1000);
+  };
+  setTimeout(tick, 1000);
+}
+
+// ─── entry point ─────────────────────────────────────────
+function playAnimation() {
+  if (animating) return;
+  showCountdown(3, () => runSlideAnimation(currentSlide));
+}
+
+async function runSlideAnimation(slide) {
+  animating = true;
+  const btn = document.getElementById('btn-play');
+  btn.textContent = '⏹ EN COURS'; btn.classList.add('recording');
+
+  // Brief purple border flash to signal start
+  const frame = document.getElementById('preview-frame');
+  frame.style.transition = 'box-shadow 0.4s';
+  frame.style.boxShadow = '0 0 0 3px #A855F7, 0 0 80px rgba(168,85,247,0.7)';
+  await wait(500);
+  frame.style.boxShadow = '';
+  await wait(300);
+
+  if (slide === 'result')     await animResult();
+  else if (slide === 'standings') await animStandings();
+  else if (slide === 'fixtures')  await animFixtures();
+  else if (slide === 'semifinal') await animSemiFinal();
+  else if (slide === 'final')     await animFinal();
+  else if (slide === 'motm')      await animMOTM();
+  else if (slide === 'starting6') await animStarting6();
+
+  await wait(2000); // linger at the end before resetting button
+  btn.textContent = '▶ ANIMER'; btn.classList.remove('recording');
+  animating = false;
+}
+
+// ══════════════════════════════════════════════════════════
+// RESULT
+// ══════════════════════════════════════════════════════════
+async function animResult() {
+  const g = id => document.getElementById(id);
+
+  // 1. Hide everything
+  hideAll([
+    g('p-ft-pill'), g('p-tourn'), g('p-round'),
+    g('p-team1'), g('p-city1'), g('p-team2'), g('p-city2'),
+    g('p-score'), g('p-divider'),
+    ...document.querySelectorAll('.res-stat'),
+    ...document.querySelectorAll('.res-goal-entry'),
+    g('p-scorers-title')
+  ]);
+
+  // 2. Slide fades in from black
+  g('slide-result').style.opacity = '0';
+  g('slide-result').style.transition = 'opacity 1.2s ease';
+  await wait(100);
+  g('slide-result').style.opacity = '1';
+  await wait(600);
+
+  // 3. Header — tournament name + pill
+  reveal(g('p-tourn'),    'anim-fade-down', 0);
+  reveal(g('p-round'),    'anim-fade-down', 200);
+  reveal(g('p-ft-pill'),  'anim-neon-flicker', 400);
+  await wait(1000);
+
+  // 4. Teams slide in from sides simultaneously
+  reveal(g('p-team1'), 'anim-fade-right', 0);
+  reveal(g('p-city1'), 'anim-fade-right', 200);
+  reveal(g('p-team2'), 'anim-fade-left',  0);
+  reveal(g('p-city2'), 'anim-fade-left',  200);
+  await wait(800);
+
+  // 5. Score drops dramatically from above
+  reveal(g('p-score'), 'anim-score-pop', 0);
+  await wait(1200);
+
+  // 6. Divider wipes across
+  reveal(g('p-divider'), 'anim-wipe', 0);
+  await wait(900);
+
+  // 7. Stats rise up one by one
+  document.querySelectorAll('.res-stat').forEach((el, i) => reveal(el, 'anim-fade-up', i * 220));
+  await wait(1400);
+
+  // 8. Goal scorers cascade in
+  reveal(g('p-scorers-title'), 'anim-fade-left', 0);
+  document.querySelectorAll('.res-goal-entry').forEach((el, i) =>
+    reveal(el, 'anim-fade-left', 200 + i * 280));
+
+  await wait(2000);
+}
+
+// ══════════════════════════════════════════════════════════
+// STANDINGS
+// ══════════════════════════════════════════════════════════
+async function animStandings() {
+  const g = id => document.getElementById(id);
+  const rows = [...document.querySelectorAll('.std-row-p')];
+  const legs  = [...document.querySelectorAll('.std-leg')];
+
+  hideAll([
+    g('std-eyebrow-p'),
+    document.querySelector('.std-title-p'),
+    g('std-subtitle-p'),
+    document.querySelector('.std-trophy'),
+    document.querySelector('.std-col-head'),
+    ...rows, ...legs
+  ]);
+
+  // Slide in
+  g('slide-standings').style.opacity = '0';
+  g('slide-standings').style.transition = 'opacity 1.2s ease';
+  await wait(100);
+  g('slide-standings').style.opacity = '1';
+  await wait(500);
+
+  // Header group — staggered
+  reveal(g('std-eyebrow-p'),                       'anim-fade-down', 0);
+  reveal(document.querySelector('.std-title-p'),    'anim-fade-down', 250);
+  reveal(g('std-subtitle-p'),                       'anim-fade-down', 450);
+  reveal(document.querySelector('.std-trophy'),     'anim-trophy',    600);
+  await wait(1400);
+
+  // Column headers
+  reveal(document.querySelector('.std-col-head'), 'anim-fade-up', 0);
+  await wait(700);
+
+  // Team rows sweep in one by one with long stagger
+  rows.forEach((el, i) => reveal(el, 'anim-slide-row', i * 380));
+  await wait(rows.length * 380 + 1000);
+
+  // Legend
+  legs.forEach((el, i) => reveal(el, 'anim-fade-up', i * 250));
+  await wait(1200);
+}
+
+// ══════════════════════════════════════════════════════════
+// FIXTURES
+// ══════════════════════════════════════════════════════════
+async function animFixtures() {
+  const g = id => document.getElementById(id);
+  const cards = [...document.querySelectorAll('.fix-card-p')];
+
+  hideAll([
+    g('fx-eyebrow-p'),
+    document.querySelector('.fix-big-title'),
+    g('fx-period-p'),
+    ...cards
+  ]);
+
+  g('slide-fixtures').style.opacity = '0';
+  g('slide-fixtures').style.transition = 'opacity 1.2s ease';
+  await wait(100);
+  g('slide-fixtures').style.opacity = '1';
+  await wait(500);
+
+  // Header
+  reveal(g('fx-eyebrow-p'),                       'anim-fade-down', 0);
+  reveal(document.querySelector('.fix-big-title'), 'anim-fade-down', 300);
+  reveal(g('fx-period-p'),                         'anim-fade-down', 550);
+  await wait(1300);
+
+  // Cards rise up with generous stagger — cinematic cascade
+  cards.forEach((el, i) => reveal(el, 'anim-card-reveal', i * 420));
+  await wait(cards.length * 420 + 1200);
+}
+
+// ══════════════════════════════════════════════════════════
+// SEMI-FINAL
+// ══════════════════════════════════════════════════════════
+async function animSemiFinal() {
+  const g = id => document.getElementById(id);
+  const sf1 = g('sf1-card'), sf2 = g('sf2-card');
+
+  hideAll([
+    g('sf-badge-p'), g('sf-title-p'), g('sf-sub-p'),
+    sf1, g('sf1-t1-p'), g('sf1-t2-p'), g('sf1-score-p'),
+    sf2, g('sf2-t1-p'), g('sf2-t2-p'), g('sf2-score-p'),
+    g('sf1-pens-p'), g('sf2-pens-p')
+  ]);
+
+  g('slide-semifinal').style.opacity = '0';
+  g('slide-semifinal').style.transition = 'opacity 1.2s ease';
+  await wait(100);
+  g('slide-semifinal').style.opacity = '1';
+  await wait(400);
+
+  // Header
+  reveal(g('sf-badge-p'),  'anim-neon-flicker', 0);
+  reveal(g('sf-title-p'),  'anim-fade-down',    400);
+  reveal(g('sf-sub-p'),    'anim-fade-down',    700);
+  await wait(1400);
+
+  // SF1 card rises
+  reveal(sf1, 'anim-card-reveal', 0);
+  await wait(500);
+  reveal(g('sf1-t1-p'),    'anim-fade-right', 100);
+  reveal(g('sf1-t2-p'),    'anim-fade-left',  100);
+  await wait(600);
+  reveal(g('sf1-score-p'), 'anim-score-pop',  0);
+  const p1 = g('sf1-pens-p');
+  if (p1 && !p1.classList.contains('slide-hidden')) reveal(p1, 'anim-fade-up', 400);
+  await wait(1400);
+
+  // SF2 card rises
+  reveal(sf2, 'anim-card-reveal', 0);
+  await wait(500);
+  reveal(g('sf2-t1-p'),    'anim-fade-right', 100);
+  reveal(g('sf2-t2-p'),    'anim-fade-left',  100);
+  await wait(600);
+  reveal(g('sf2-score-p'), 'anim-score-pop',  0);
+  const p2 = g('sf2-pens-p');
+  if (p2 && !p2.classList.contains('slide-hidden')) reveal(p2, 'anim-fade-up', 400);
+  await wait(1600);
+}
+
+// ══════════════════════════════════════════════════════════
+// FINAL
+// ══════════════════════════════════════════════════════════
+async function animFinal() {
+  const g = id => document.getElementById(id);
+  const goalEntries = [...document.querySelectorAll('.final-goal-entry')];
+
+  hideAll([
+    document.querySelector('.final-crown'),
+    g('fn-badge-p'), g('fn-title-p'), g('fn-sub-p'),
+    g('fn-t1-p'), g('fn-city1-p'), g('fn-t2-p'), g('fn-city2-p'),
+    g('fn-score-p'), g('fn-divider'),
+    document.querySelector('.final-winner-label'),
+    g('fn-winner-p'), g('fn-scorers-title'),
+    ...goalEntries
+  ]);
+
+  // Background glow fades in slowly
+  const glow = g('final-bg-glow');
+  if (glow) { glow.style.opacity = '0'; glow.style.transition = 'opacity 2.5s ease'; }
+
+  g('slide-final').style.opacity = '0';
+  g('slide-final').style.transition = 'opacity 1.4s ease';
+  await wait(100);
+  g('slide-final').style.opacity = '1';
+  if (glow) setTimeout(() => { glow.style.opacity = '1'; }, 200);
+  await wait(800);
+
+  // Crown drops theatrically
+  reveal(document.querySelector('.final-crown'), 'anim-trophy', 0);
+  await wait(900);
+
+  // Badge pulses on
+  reveal(g('fn-badge-p'), 'anim-neon-flicker', 0);
+  await wait(700);
+
+  // Title + subtitle
+  reveal(g('fn-title-p'), 'anim-fade-down', 0);
+  reveal(g('fn-sub-p'),   'anim-fade-down', 350);
+  await wait(1200);
+
+  // Teams slide in from sides
+  reveal(g('fn-t1-p'),    'anim-fade-right', 0);
+  reveal(g('fn-city1-p'), 'anim-fade-right', 250);
+  reveal(g('fn-t2-p'),    'anim-fade-left',  0);
+  reveal(g('fn-city2-p'), 'anim-fade-left',  250);
+  await wait(1000);
+
+  // Score — the big moment
+  reveal(g('fn-score-p'), 'anim-score-pop', 0);
+  await wait(1400);
+
+  // Divider wipes
+  reveal(g('fn-divider'), 'anim-wipe-full', 0);
+  await wait(1000);
+
+  // Winner reveal
+  reveal(document.querySelector('.final-winner-label'), 'anim-fade-up', 0);
+  reveal(g('fn-winner-p'), 'anim-scale-in', 400);
+  const pens = g('fn-pens-p');
+  if (pens && !pens.classList.contains('slide-hidden')) reveal(pens, 'anim-fade-up', 700);
+  await wait(1200);
+
+  // Goal scorers
+  reveal(g('fn-scorers-title'), 'anim-fade-left', 0);
+  goalEntries.forEach((el, i) => reveal(el, 'anim-fade-left', 300 + i * 320));
+  await wait(goalEntries.length * 320 + 1000);
+}
+
+// ══════════════════════════════════════════════════════════
+// MAN OF THE MATCH
+// ══════════════════════════════════════════════════════════
+async function animMOTM() {
+  const g = id => document.getElementById(id);
+  const stats = [...document.querySelectorAll('.motm-sc')];
+  const wrap  = document.querySelector('.motm-avatar-wrap');
+
+  hideAll([
+    g('m-eyebrow-p'), wrap,
+    g('motm-name-p'), g('m-pos-chip'), g('m-matchref-p'),
+    ...stats,
+    document.querySelector('.motm-rating-p'),
+    g('m-stars-p')
+  ]);
+
+  g('slide-motm').style.opacity = '0';
+  g('slide-motm').style.transition = 'opacity 1.2s ease';
+  await wait(100);
+  g('slide-motm').style.opacity = '1';
+  await wait(500);
+
+  // Eyebrow
+  reveal(g('m-eyebrow-p'), 'anim-fade-down', 0);
+  await wait(700);
+
+  // Avatar — the centrepiece
+  reveal(wrap, 'anim-scale-in', 0);
+  await wait(1200);
+
+  // Name + position
+  reveal(g('motm-name-p'),   'anim-fade-up', 0);
+  reveal(g('m-pos-chip'),    'anim-fade-up', 300);
+  reveal(g('m-matchref-p'),  'anim-fade-up', 550);
+  await wait(1200);
+
+  // Stats cascade in pairs
+  stats.forEach((el, i) => reveal(el, 'anim-card-reveal', i * 220));
+  await wait(stats.length * 220 + 800);
+
+  // Rating bar animates
+  const rfill = g('m-rfill-p');
+  const ratingWrap = document.querySelector('.motm-rating-p');
+  reveal(ratingWrap, 'anim-fade-up', 0);
+  if (rfill) {
+    const targetW = rfill.style.width || '94%';
+    rfill.style.width = '0%';
+    rfill.style.transition = 'none';
+    setTimeout(() => {
+      rfill.style.transition = 'width 1.8s cubic-bezier(.16,1,.3,1)';
+      rfill.style.width = targetW;
+    }, 400);
+  }
+  await wait(1000);
+
+  // Stars
+  reveal(g('m-stars-p'), 'anim-fade-up', 0);
+  await wait(1500);
+}
+
+// ══════════════════════════════════════════════════════════
+// STARTING 6
+// ══════════════════════════════════════════════════════════
+async function animStarting6() {
+  const g = id => document.getElementById(id);
+  const slide = g('slide-starting6');
+  if (!slide) return;
+  const cards = [...document.querySelectorAll('.s6-player-card')];
+
+  hideAll([
+    g('s6-eyebrow-p'),
+    document.querySelector('.s6-title'),
+    g('s6-subtitle-p'),
+    ...cards
+  ]);
+
+  slide.style.opacity = '0';
+  slide.style.transition = 'opacity 1.2s ease';
+  await wait(100);
+  slide.style.opacity = '1';
+  await wait(500);
+
+  // Header
+  reveal(g('s6-eyebrow-p'),                    'anim-fade-down', 0);
+  reveal(document.querySelector('.s6-title'),  'anim-fade-down', 300);
+  reveal(g('s6-subtitle-p'),                   'anim-fade-down', 550);
+  await wait(1200);
+
+  // Cards — slow cascade, left column then right column interleaved
+  cards.forEach((el, i) => reveal(el, 'anim-card-reveal', i * 350));
+  await wait(cards.length * 350 + 1200);
+}
+// ════════════════════════════════════════════════════════════
 </script>
 </body>
 </html>
