@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>⚡GDGSR FootPack Editor</title>
+<title>⚡ FootPack Editor</title>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;700;900&family=Bebas+Neue&family=Orbitron:wght@500;700;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <style>
@@ -288,53 +288,59 @@ body{background:var(--ui-bg);color:var(--ui-text);font-family:'Inter',sans-serif
 .fix-live-badge{font-family:'Orbitron',sans-serif;font-size:0.38rem;font-weight:700;letter-spacing:2px;padding:2px 5px;border-radius:3px;margin-top:3px;text-align:center;animation:blink 1.3s infinite;}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:0.3}}
 
-/* ── TRANSFER ANNOUNCEMENT (1 PLAYER) ── */
+/* ══════════════════════════════════════════════
+   TRANSFER WINDOW — OFFICIAL TOURNAMENT STYLE
+   ══════════════════════════════════════════════ */
 .slide-transfer{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;overflow:hidden;}
 
-/* diagonal slash background accent */
-.tr-slash{position:absolute;top:0;right:-20%;width:65%;height:100%;z-index:0;transform:skewX(-8deg);opacity:0.07;}
+/* — top chrome bar — */
+.tr-chrome{position:relative;z-index:5;display:flex;align-items:stretch;height:42px;overflow:hidden;}
+.tr-chrome-left{flex:1;display:flex;align-items:center;padding:0 14px;gap:8px;}
+.tr-chrome-logo{font-family:'Orbitron',sans-serif;font-size:0.56rem;font-weight:900;letter-spacing:3px;}
+.tr-chrome-season{font-size:0.46rem;letter-spacing:3px;opacity:0.45;}
+.tr-chrome-right{display:flex;align-items:center;padding:0 14px;}
+.tr-window-tag{font-family:'Orbitron',sans-serif;font-size:0.42rem;font-weight:700;letter-spacing:3px;padding:4px 10px;border-radius:3px;text-transform:uppercase;}
 
-/* top bar */
-.tr-topbar{position:relative;z-index:3;display:flex;justify-content:space-between;align-items:center;padding:14px 16px 0;}
-.tr-league-name{font-family:'Orbitron',sans-serif;font-size:0.46rem;letter-spacing:4px;opacity:0.7;}
-.tr-type-badge{font-family:'Orbitron',sans-serif;font-size:0.44rem;font-weight:700;letter-spacing:3px;padding:5px 12px;border-radius:4px;}
+/* — player photo — full height section — */
+.tr-photo-section{position:relative;z-index:2;flex:1;overflow:hidden;display:flex;align-items:flex-end;}
+.tr-photo-section img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top center;}
+.tr-photo-placeholder{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:6rem;opacity:0.1;}
+/* number watermark behind player */
+.tr-bg-number{position:absolute;right:-5px;bottom:-20px;font-family:'Bebas Neue',sans-serif;font-size:11rem;line-height:1;opacity:0.07;z-index:1;letter-spacing:-6px;pointer-events:none;}
+/* gradient fading into bottom panel */
+.tr-photo-fade{position:absolute;bottom:0;left:0;right:0;height:55%;z-index:3;pointer-events:none;}
+/* player name floats over photo */
+.tr-name-over{position:absolute;bottom:0;left:0;right:0;z-index:4;padding:0 14px 10px;}
+.tr-name-over-pre{font-family:'Barlow Condensed',sans-serif;font-weight:400;font-size:0.72rem;letter-spacing:8px;opacity:0.6;text-transform:uppercase;line-height:1;}
+.tr-name-over-main{font-family:'Bebas Neue',sans-serif;font-size:3.4rem;letter-spacing:4px;line-height:0.88;text-transform:uppercase;}
 
-/* NOUVEAU / OFFICIEL big stamp */
-.tr-stamp-wrap{position:relative;z-index:3;padding:8px 16px 0;text-align:center;}
-.tr-stamp{font-family:'Bebas Neue',sans-serif;font-size:3.8rem;letter-spacing:10px;line-height:1;position:relative;display:inline-block;}
-.tr-stamp::after{content:'';position:absolute;bottom:4px;left:0;right:0;height:3px;}
-.tr-stamp-sub{font-family:'Orbitron',sans-serif;font-size:0.46rem;letter-spacing:6px;opacity:0.5;margin-top:-4px;}
+/* — bottom data panel — */
+.tr-data-panel{position:relative;z-index:5;padding:10px 14px 0;}
 
-/* player photo — full bleed, cuts off at top */
-.tr-player-photo-wrap{position:relative;z-index:2;flex:1;display:flex;align-items:flex-end;justify-content:center;overflow:hidden;margin:0 -1px;}
-.tr-player-photo-img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block;}
-.tr-player-photo-placeholder{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:5rem;opacity:0.15;}
-/* gradient overlay at bottom of photo */
-.tr-photo-gradient{position:absolute;bottom:0;left:0;right:0;height:60%;z-index:3;}
+/* position + nationality row */
+.tr-pos-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;}
+.tr-pos-pill{font-family:'Orbitron',sans-serif;font-size:0.46rem;font-weight:700;letter-spacing:3px;padding:4px 12px;border-radius:3px;}
+.tr-nat-pill{font-size:0.56rem;letter-spacing:2px;opacity:0.6;font-family:'Barlow Condensed',sans-serif;font-weight:700;}
 
-/* name block — overlaps photo bottom */
-.tr-name-block{position:relative;z-index:4;padding:0 16px;text-align:center;margin-top:-8px;}
-.tr-player-firstname{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1.0rem;letter-spacing:6px;opacity:0.7;text-transform:uppercase;}
-.tr-player-lastname{font-family:'Bebas Neue',sans-serif;font-size:3.2rem;letter-spacing:6px;line-height:0.9;text-transform:uppercase;}
-.tr-player-num{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:3px;opacity:0.45;margin-top:2px;}
+/* clubs transfer row */
+.tr-move-row{display:flex;align-items:center;gap:6px;padding:9px 0;border-top:1px solid rgba(255,255,255,0.07);border-bottom:1px solid rgba(255,255,255,0.07);margin-bottom:8px;}
+.tr-club-chip{flex:1;display:flex;flex-direction:column;gap:2px;}
+.tr-club-chip-lbl{font-size:0.42rem;letter-spacing:3px;opacity:0.38;text-transform:uppercase;}
+.tr-club-chip-name{font-family:'Bebas Neue',sans-serif;font-size:1.05rem;letter-spacing:2px;line-height:1;}
+.tr-move-arrow{display:flex;flex-direction:column;align-items:center;gap:2px;padding:0 6px;flex-shrink:0;}
+.tr-move-arrow-icon{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;line-height:1;}
+.tr-move-fee{font-family:'Orbitron',sans-serif;font-size:0.4rem;font-weight:700;letter-spacing:2px;padding:2px 7px;border-radius:2px;}
 
-/* clubs row */
-.tr-clubs-row{position:relative;z-index:4;display:flex;align-items:center;justify-content:center;gap:0;padding:8px 16px 0;}
-.tr-club-block{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;}
-.tr-club-label{font-size:0.44rem;letter-spacing:3px;opacity:0.4;text-transform:uppercase;}
-.tr-club-name{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:3px;line-height:1;}
-.tr-clubs-sep{display:flex;flex-direction:column;align-items:center;padding:0 10px;gap:2px;flex-shrink:0;}
-.tr-arrow-big{font-size:1.4rem;line-height:1;}
-.tr-fee-tag{font-family:'Orbitron',sans-serif;font-size:0.42rem;font-weight:700;letter-spacing:2px;padding:3px 9px;border-radius:3px;white-space:nowrap;}
+/* stats strip — 4 data cells */
+.tr-stats-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(255,255,255,0.06);border-radius:6px;overflow:hidden;margin-bottom:10px;}
+.tr-stat-cell{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;padding:7px 2px;background:rgba(0,0,0,0.25);}
+.tr-stat-val{font-family:'Bebas Neue',sans-serif;font-size:1.05rem;letter-spacing:1px;line-height:1;}
+.tr-stat-lbl{font-size:0.4rem;letter-spacing:2px;opacity:0.38;text-transform:uppercase;text-align:center;}
 
-/* details grid */
-.tr-details-grid{position:relative;z-index:4;display:grid;grid-template-columns:repeat(3,1fr);gap:0;padding:8px 14px 12px;border-top:1px solid rgba(255,255,255,0.07);margin:8px 14px 0;}
-.tr-detail-cell{display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 0;position:relative;}
-.tr-detail-cell:not(:last-child)::after{content:'';position:absolute;right:0;top:20%;bottom:20%;width:1px;background:rgba(255,255,255,0.08);}
-.tr-detail-val{font-family:'Bebas Neue',sans-serif;font-size:1.0rem;letter-spacing:2px;line-height:1;}
-.tr-detail-lbl{font-size:0.44rem;letter-spacing:2px;opacity:0.38;text-transform:uppercase;}
+/* type bar accent on left edge */
+.tr-type-accent{position:absolute;left:0;top:0;bottom:0;width:3px;z-index:10;}
 
-/* sidebar transfer editor */
+/* sidebar upload */
 .tr-photo-upload-zone{border:2px dashed rgba(0,240,255,0.2);border-radius:10px;padding:14px;text-align:center;cursor:pointer;transition:all 0.2s;position:relative;overflow:hidden;margin-bottom:6px;}
 .tr-photo-upload-zone:hover{border-color:rgba(0,240,255,0.5);background:rgba(0,240,255,0.04);}
 .tr-photo-upload-zone input[type="file"]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;}
@@ -658,16 +664,21 @@ body{background:var(--ui-bg);color:var(--ui-text);font-family:'Inter',sans-serif
 
   <!-- TRANSFER CTRL -->
   <div id="ctrl-transfer" style="display:none">
-    <div class="section-label">Type de transfert</div>
-    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:5px;margin-bottom:4px;">
-      <div class="bg-mode-btn" id="tr-btn-in"   onclick="setTransferType('in')"   style="font-size:0.44rem;padding:6px 3px;">🟢 ARRIVÉE</div>
-      <div class="bg-mode-btn" id="tr-btn-out"  onclick="setTransferType('out')"  style="font-size:0.44rem;padding:6px 3px;">🔴 DÉPART</div>
-      <div class="bg-mode-btn" id="tr-btn-loan" onclick="setTransferType('loan')" style="font-size:0.44rem;padding:6px 3px;">🔵 PRÊT</div>
+    <div class="section-label">Type de mouvement</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:5px;margin-bottom:2px;">
+      <div class="bg-mode-btn active" id="tr-btn-in"   onclick="setTransferType('in')"   style="font-size:0.42rem;padding:6px 2px;">📥 ARRIVÉE</div>
+      <div class="bg-mode-btn"        id="tr-btn-out"  onclick="setTransferType('out')"  style="font-size:0.42rem;padding:6px 2px;">📤 DÉPART</div>
+      <div class="bg-mode-btn"        id="tr-btn-loan" onclick="setTransferType('loan')" style="font-size:0.42rem;padding:6px 2px;">🔄 PRÊT</div>
+    </div>
+    <div class="section-label">Tournoi</div>
+    <div class="two-col">
+      <div class="field-row"><label>Nom tournoi</label><input type="text" id="tr-league" value="LIGUE DES CHAMPIONS" oninput="renderTransfer()"></div>
+      <div class="field-row"><label>Saison</label><input type="text" id="tr-season" value="2025–26" oninput="renderTransfer()"></div>
     </div>
     <div class="section-label">Photo du joueur</div>
     <div class="tr-photo-upload-zone" onclick="document.getElementById('tr-photo-inp').click()">
       <div class="upl-icon">📸</div>
-      <div class="upl-txt">Choisir la photo</div>
+      <div class="upl-txt">Photo full body</div>
       <input type="file" id="tr-photo-inp" accept="image/*" style="display:none" onchange="loadTransferPhoto(this)">
     </div>
     <img id="tr-photo-preview-img" class="tr-photo-preview-img" alt="">
@@ -680,20 +691,19 @@ body{background:var(--ui-bg);color:var(--ui-text);font-family:'Inter',sans-serif
       <div class="field-row"><label>Poste</label><input type="text" id="tr-pos" value="ATTAQUANT" oninput="renderTransfer()"></div>
       <div class="field-row"><label>Numéro</label><input type="text" id="tr-num" value="10" oninput="renderTransfer()"></div>
     </div>
-    <div class="field-row"><label>Nationalité</label><input type="text" id="tr-nation" value="🇲🇦 MAROC" oninput="renderTransfer()"></div>
-    <div class="section-label">Clubs</div>
-    <div class="field-row"><label>Club de départ</label><input type="text" id="tr-from" value="HAWKS FC" oninput="renderTransfer()"></div>
-    <div class="field-row"><label>Club d'arrivée</label><input type="text" id="tr-to" value="ATLAS FC" oninput="renderTransfer()"></div>
-    <div class="section-label">Détails contrat</div>
+    <div class="two-col">
+      <div class="field-row"><label>Nationalité</label><input type="text" id="tr-nation" value="🇲🇦 MAROC" oninput="renderTransfer()"></div>
+      <div class="field-row"><label>Âge</label><input type="text" id="tr-age" value="24" oninput="renderTransfer()"></div>
+    </div>
+    <div class="section-label">Mouvement</div>
+    <div class="field-row"><label>Club départ</label><input type="text" id="tr-from" value="HAWKS FC" oninput="renderTransfer()"></div>
+    <div class="field-row"><label>Club arrivée</label><input type="text" id="tr-to" value="ATLAS FC" oninput="renderTransfer()"></div>
     <div class="two-col">
       <div class="field-row"><label>Montant</label><input type="text" id="tr-fee" value="2.5M €" oninput="renderTransfer()"></div>
-      <div class="field-row"><label>Durée</label><input type="text" id="tr-duration" value="3 ANS" oninput="renderTransfer()"></div>
+      <div class="field-row"><label>Contrat</label><input type="text" id="tr-duration" value="3 ANS" oninput="renderTransfer()"></div>
     </div>
-    <div class="two-col">
-      <div class="field-row"><label>Âge</label><input type="text" id="tr-age" value="24 ANS" oninput="renderTransfer()"></div>
-      <div class="field-row"><label>Saison</label><input type="text" id="tr-season" value="2025-26" oninput="renderTransfer()"></div>
-    </div>
-    <div class="field-row"><label>Ligue / Tournoi</label><input type="text" id="tr-league" value="LIGUE DES CHAMPIONS" oninput="renderTransfer()"></div>
+    <div class="section-label">Stats joueur (4 cases)</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:5px;" id="tr-stats-edit"></div>
   </div>
 
   <div class="section-label">Filigrane</div>
@@ -851,61 +861,59 @@ body{background:var(--ui-bg);color:var(--ui-text);font-family:'Inter',sans-serif
         <div class="s6-grid-preview" id="s6-grid-preview"></div>
       </div>
 
-      <!-- TRANSFER ANNOUNCEMENT -->
+      <!-- TRANSFER WINDOW — OFFICIAL -->
       <div class="slide-transfer slide-hidden" id="slide-transfer">
-        <!-- diagonal slash accent -->
-        <div class="tr-slash" id="tr-slash"></div>
-        <!-- top bar -->
-        <div class="tr-topbar">
-          <div class="tr-league-name" id="tr-league-p">LIGUE DES CHAMPIONS</div>
-          <div class="tr-type-badge" id="tr-type-badge-p">🟢 ARRIVÉE</div>
-        </div>
-        <!-- big stamp -->
-        <div class="tr-stamp-wrap">
-          <div class="tr-stamp" id="tr-stamp-p">BIENVENUE</div>
-          <div class="tr-stamp-sub" id="tr-stamp-sub-p">TRANSFERT OFFICIEL · 2025-26</div>
-        </div>
-        <!-- player photo -->
-        <div class="tr-player-photo-wrap" id="tr-photo-wrap">
-          <div class="tr-player-photo-placeholder" id="tr-photo-placeholder">👤</div>
-          <img id="tr-photo-p" class="tr-player-photo-img" style="display:none;" alt="">
-          <div class="tr-photo-gradient" id="tr-photo-gradient"></div>
-        </div>
-        <!-- name -->
-        <div class="tr-name-block">
-          <div class="tr-player-firstname" id="tr-firstname-p">KARIM</div>
-          <div class="tr-player-lastname" id="tr-lastname-p">HASSAN</div>
-          <div class="tr-player-num" id="tr-num-p">#10 · ATTAQUANT</div>
-        </div>
-        <!-- clubs row -->
-        <div class="tr-clubs-row">
-          <div class="tr-club-block">
-            <div class="tr-club-label">DÉPART</div>
-            <div class="tr-club-name" id="tr-from-p">HAWKS FC</div>
+        <!-- left type accent bar -->
+        <div class="tr-type-accent" id="tr-type-accent"></div>
+
+        <!-- top chrome -->
+        <div class="tr-chrome" id="tr-chrome">
+          <div class="tr-chrome-left">
+            <div class="tr-chrome-logo" id="tr-chrome-logo">LIGUE DES CHAMPIONS</div>
+            <div class="tr-chrome-season" id="tr-chrome-season">2025–26</div>
           </div>
-          <div class="tr-clubs-sep">
-            <div class="tr-arrow-big" id="tr-arrow-p">→</div>
-            <div class="tr-fee-tag" id="tr-fee-tag-p">2.5M €</div>
-          </div>
-          <div class="tr-club-block">
-            <div class="tr-club-label">ARRIVÉE</div>
-            <div class="tr-club-name" id="tr-to-p">ATLAS FC</div>
+          <div class="tr-chrome-right">
+            <div class="tr-window-tag" id="tr-window-tag">📥 ARRIVÉE</div>
           </div>
         </div>
-        <!-- details grid -->
-        <div class="tr-details-grid">
-          <div class="tr-detail-cell">
-            <div class="tr-detail-val" id="tr-age-p">24 ANS</div>
-            <div class="tr-detail-lbl">ÂGE</div>
+
+        <!-- player photo — fills most of frame -->
+        <div class="tr-photo-section" id="tr-photo-section">
+          <div class="tr-bg-number" id="tr-bg-number">10</div>
+          <div class="tr-photo-placeholder" id="tr-photo-placeholder">👤</div>
+          <img id="tr-photo-p" style="display:none;position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top center;" alt="">
+          <div class="tr-photo-fade" id="tr-photo-fade"></div>
+          <!-- name sits over the photo fade -->
+          <div class="tr-name-over">
+            <div class="tr-name-over-pre" id="tr-firstname-p">KARIM</div>
+            <div class="tr-name-over-main" id="tr-lastname-p">HASSAN</div>
           </div>
-          <div class="tr-detail-cell">
-            <div class="tr-detail-val" id="tr-nation-p">🇲🇦 MAROC</div>
-            <div class="tr-detail-lbl">NATION</div>
+        </div>
+
+        <!-- bottom data panel -->
+        <div class="tr-data-panel">
+          <!-- position + nationality -->
+          <div class="tr-pos-row">
+            <div class="tr-pos-pill" id="tr-pos-pill">ATTAQUANT · #10</div>
+            <div class="tr-nat-pill" id="tr-nat-pill">🇲🇦 MAROC · 24 ANS</div>
           </div>
-          <div class="tr-detail-cell">
-            <div class="tr-detail-val" id="tr-duration-p">3 ANS</div>
-            <div class="tr-detail-lbl">CONTRAT</div>
+          <!-- club move -->
+          <div class="tr-move-row">
+            <div class="tr-club-chip">
+              <div class="tr-club-chip-lbl">QUITTE</div>
+              <div class="tr-club-chip-name" id="tr-from-p">HAWKS FC</div>
+            </div>
+            <div class="tr-move-arrow">
+              <div class="tr-move-arrow-icon" id="tr-move-icon">→</div>
+              <div class="tr-move-fee" id="tr-move-fee">2.5M €</div>
+            </div>
+            <div class="tr-club-chip" style="text-align:right;">
+              <div class="tr-club-chip-lbl">REJOINT</div>
+              <div class="tr-club-chip-name" id="tr-to-p">ATLAS FC</div>
+            </div>
           </div>
+          <!-- 4-cell stats strip -->
+          <div class="tr-stats-strip" id="tr-stats-strip-p"></div>
         </div>
       </div>
 
@@ -958,6 +966,7 @@ let transferPhoto = null;
 window.onload=()=>{
   buildScorersEditor();buildFinalScorersEditor();
   buildStandingsEditor();buildFixturesEditor();buildMOTMEditor();buildS6Editor();
+  buildTransferStatsEditor();
   applyColors();updateResult();updateStandings();updateFixtures();
   updateSemiFinal();updateFinal();updateMOTM();updateStarting6();renderTransfer();updateWatermark();
 };
@@ -1436,8 +1445,35 @@ function v(id){return document.getElementById(id)?.value||'';}
 function setText(id,txt){const el=document.getElementById(id);if(el)el.textContent=txt;}
 
 // ════════════════════════════════════════════════════════════
-// ─── TRANSFER ANNOUNCEMENT ───
+// ─── TRANSFER WINDOW — OFFICIAL TOURNAMENT STYLE ───
 // ════════════════════════════════════════════════════════════
+let transferType = 'in';
+let transferPhoto = null;
+
+// default stats (editable)
+const trStats = [
+  {lbl:'BUTS',   val:'18'},
+  {lbl:'PASSES', val:'94%'},
+  {lbl:'TIRS',   val:'67'},
+  {lbl:'MATCHS', val:'32'},
+];
+
+function buildTransferStatsEditor() {
+  const cont = document.getElementById('tr-stats-edit');
+  if (!cont) return;
+  cont.innerHTML = '';
+  trStats.forEach((s, i) => {
+    const pair = document.createElement('div');
+    pair.style.cssText = 'display:flex;flex-direction:column;gap:3px;';
+    pair.innerHTML = `
+      <div style="display:flex;gap:3px;">
+        <input type="text" value="${s.lbl}" placeholder="Label" style="background:rgba(0,0,0,0.4);border:1px solid var(--ui-border);border-radius:5px;color:var(--ui-text);font-size:0.7rem;padding:4px 5px;outline:none;width:50%;" oninput="trStats[${i}].lbl=this.value;renderTransfer()">
+        <input type="text" value="${s.val}" placeholder="Valeur" style="background:rgba(0,0,0,0.4);border:1px solid var(--ui-border);border-radius:5px;color:var(--ui-text);font-size:0.7rem;padding:4px 5px;outline:none;width:50%;" oninput="trStats[${i}].val=this.value;renderTransfer()">
+      </div>`;
+    cont.appendChild(pair);
+  });
+}
+
 function setTransferType(type) {
   transferType = type;
   ['in','out','loan'].forEach(t => {
@@ -1460,97 +1496,104 @@ function loadTransferPhoto(input) {
 }
 
 function renderTransfer() {
-  const {neon, bg, nr, glow} = neonStyle();
+  const {neon, bg, nr} = neonStyle();
+  const bgColor = document.getElementById('c-bg')?.value || '#020B18';
+  const bgR = hexToRGB(bgColor);
 
   // type config
-  const typeConfig = {
-    in:   { color:'#22C55E', stamp:'BIENVENUE', badge:'🟢 ARRIVÉE',  arrow:'→' },
-    out:  { color:'#EF4444', stamp:'AU REVOIR', badge:'🔴 DÉPART',   arrow:'→' },
-    loan: { color:'#3B82F6', stamp:'EN PRÊT',   badge:'🔵 PRÊT',     arrow:'⇆' },
+  const typeCfg = {
+    in:   { color:'#22C55E', tag:'📥 ARRIVÉE',  fromLbl:'QUITTE', toLbl:'REJOINT',  arrow:'→' },
+    out:  { color:'#EF4444', tag:'📤 DÉPART',   fromLbl:'QUITTE', toLbl:'REJOINT',  arrow:'→' },
+    loan: { color:'#3B82F6', tag:'🔄 PRÊT',     fromLbl:'PRÊTÉ PAR', toLbl:'VA À', arrow:'⇆' },
   };
-  const cfg = typeConfig[transferType] || typeConfig.in;
+  const cfg = typeCfg[transferType] || typeCfg.in;
   const col = cfg.color;
   const colR = hexToRGB(col);
 
-  // slash accent
-  const slash = document.getElementById('tr-slash');
-  if (slash) slash.style.background = `linear-gradient(135deg, ${col}, transparent)`;
+  // type accent bar
+  const accent = document.getElementById('tr-type-accent');
+  if (accent) { accent.style.background = `linear-gradient(to bottom, ${col}, rgba(${colR},0.2))`; accent.style.boxShadow = `2px 0 12px rgba(${colR},0.4)`; }
 
-  // topbar
-  const leagueEl = document.getElementById('tr-league-p');
-  if (leagueEl) { leagueEl.textContent = v('tr-league') || 'LIGUE DES CHAMPIONS'; leagueEl.style.color = 'rgba(255,255,255,0.55)'; }
-  const badge = document.getElementById('tr-type-badge-p');
-  if (badge) {
-    badge.textContent = cfg.badge;
-    badge.style.background = `rgba(${colR},0.15)`;
-    badge.style.border = `1px solid rgba(${colR},0.4)`;
-    badge.style.color = col;
-  }
-
-  // stamp
-  const stamp = document.getElementById('tr-stamp-p');
-  if (stamp) {
-    stamp.textContent = cfg.stamp;
-    stamp.style.color = col;
-    stamp.style.textShadow = `0 0 40px rgba(${colR},0.5), 0 0 80px rgba(${colR},0.2)`;
-  }
-  const stampAfter = document.getElementById('tr-stamp-p');
-  // stamp underline via box-shadow trick on sub
-  const stampSub = document.getElementById('tr-stamp-sub-p');
-  if (stampSub) {
-    const season = v('tr-season') || '2025-26';
-    stampSub.textContent = 'TRANSFERT OFFICIEL · ' + season;
-    stampSub.style.color = `rgba(${colR},0.5)`;
-  }
+  // chrome top bar
+  const chrome = document.getElementById('tr-chrome');
+  if (chrome) { chrome.style.background = `rgba(${colR},0.08)`; chrome.style.borderBottom = `1px solid rgba(${colR},0.2)`; }
+  const logo = document.getElementById('tr-chrome-logo');
+  if (logo) { logo.textContent = (v('tr-league') || 'LIGUE DES CHAMPIONS').toUpperCase(); logo.style.color = col; }
+  const season = document.getElementById('tr-chrome-season');
+  if (season) season.textContent = v('tr-season') || '2025–26';
+  const wtag = document.getElementById('tr-window-tag');
+  if (wtag) { wtag.textContent = cfg.tag; wtag.style.background = `rgba(${colR},0.15)`; wtag.style.border = `1px solid rgba(${colR},0.35)`; wtag.style.color = col; }
 
   // photo
   const photoImg = document.getElementById('tr-photo-p');
   const placeholder = document.getElementById('tr-photo-placeholder');
   if (transferPhoto) {
-    photoImg.src = transferPhoto; photoImg.style.display = 'block';
+    if (photoImg) { photoImg.src = transferPhoto; photoImg.style.display = 'block'; }
     if (placeholder) placeholder.style.display = 'none';
   } else {
     if (photoImg) photoImg.style.display = 'none';
     if (placeholder) placeholder.style.display = 'flex';
   }
-  // photo gradient fades into bg
-  const grad = document.getElementById('tr-photo-gradient');
-  if (grad) grad.style.background = `linear-gradient(to top, ${bgMode==='color'?(document.getElementById('c-bg')?.value||'#020B18'):'rgba(2,11,24,0.95)'} 0%, transparent 100%)`;
+
+  // bg number watermark
+  const bgNum = document.getElementById('tr-bg-number');
+  if (bgNum) { bgNum.textContent = v('tr-num') || '10'; bgNum.style.color = col; }
+
+  // photo fade gradient
+  const fade = document.getElementById('tr-photo-fade');
+  if (fade) fade.style.background = `linear-gradient(to top, ${bgColor} 0%, rgba(${bgR},0.7) 50%, transparent 100%)`;
 
   // name
   const fn = document.getElementById('tr-firstname-p');
-  if (fn) { fn.textContent = v('tr-firstname') || 'KARIM'; fn.style.color = 'rgba(255,255,255,0.65)'; }
+  if (fn) { fn.textContent = (v('tr-firstname') || 'KARIM').toUpperCase(); fn.style.color = 'rgba(255,255,255,0.7)'; }
   const ln = document.getElementById('tr-lastname-p');
-  if (ln) { ln.textContent = v('tr-lastname') || 'HASSAN'; ln.style.color = '#fff'; ln.style.textShadow = `0 0 30px rgba(${colR},0.3)`; }
-  const numEl = document.getElementById('tr-num-p');
-  if (numEl) { numEl.textContent = '#' + (v('tr-num')||'10') + ' · ' + (v('tr-pos')||'ATTAQUANT'); numEl.style.color = col; }
+  if (ln) { ln.textContent = (v('tr-lastname') || 'HASSAN').toUpperCase(); ln.style.color = '#fff'; ln.style.textShadow = `0 2px 20px rgba(0,0,0,0.8)`; }
 
-  // clubs
-  const fromEl = document.getElementById('tr-from-p');
-  if (fromEl) { fromEl.textContent = v('tr-from') || 'HAWKS FC'; fromEl.style.color = 'rgba(255,255,255,0.55)'; }
-  const toEl = document.getElementById('tr-to-p');
-  if (toEl) { toEl.textContent = v('tr-to') || 'ATLAS FC'; toEl.style.color = '#fff'; toEl.style.fontWeight = '700'; }
-  const arrowEl = document.getElementById('tr-arrow-p');
-  if (arrowEl) { arrowEl.textContent = cfg.arrow; arrowEl.style.color = col; arrowEl.style.textShadow = `0 0 12px rgba(${colR},0.6)`; }
-  const feeTag = document.getElementById('tr-fee-tag-p');
-  if (feeTag) {
-    feeTag.textContent = v('tr-fee') || '2.5M €';
-    feeTag.style.background = `rgba(${colR},0.12)`;
-    feeTag.style.border = `1px solid rgba(${colR},0.35)`;
-    feeTag.style.color = col;
+  // pos pill
+  const posPill = document.getElementById('tr-pos-pill');
+  if (posPill) {
+    posPill.textContent = (v('tr-pos') || 'ATTAQUANT').toUpperCase() + ' · #' + (v('tr-num') || '10');
+    posPill.style.background = `rgba(${colR},0.12)`;
+    posPill.style.border = `1px solid rgba(${colR},0.3)`;
+    posPill.style.color = col;
+  }
+  const natPill = document.getElementById('tr-nat-pill');
+  if (natPill) natPill.textContent = (v('tr-nation') || '🇲🇦 MAROC') + ' · ' + (v('tr-age') || '24') + ' ANS';
+
+  // clubs move
+  const fromLabel = document.querySelector('#slide-transfer .tr-club-chip:first-child .tr-club-chip-lbl');
+  const toLabel   = document.querySelector('#slide-transfer .tr-club-chip:last-child .tr-club-chip-lbl');
+  if (fromLabel) fromLabel.textContent = cfg.fromLbl;
+  if (toLabel)   toLabel.textContent   = cfg.toLbl;
+
+  const fromP = document.getElementById('tr-from-p');
+  if (fromP) { fromP.textContent = (v('tr-from') || 'HAWKS FC').toUpperCase(); fromP.style.color = 'rgba(255,255,255,0.6)'; }
+  const toP = document.getElementById('tr-to-p');
+  if (toP) { toP.textContent = (v('tr-to') || 'ATLAS FC').toUpperCase(); toP.style.color = '#fff'; toP.style.fontWeight = 'bold'; }
+
+  const moveIcon = document.getElementById('tr-move-icon');
+  if (moveIcon) { moveIcon.textContent = cfg.arrow; moveIcon.style.color = col; moveIcon.style.textShadow = `0 0 12px rgba(${colR},0.6)`; }
+  const moveFee = document.getElementById('tr-move-fee');
+  if (moveFee) { moveFee.textContent = v('tr-fee') || '2.5M €'; moveFee.style.background = `rgba(${colR},0.12)`; moveFee.style.border = `1px solid rgba(${colR},0.3)`; moveFee.style.color = col; }
+
+  // duration label update — add contrat info to fee area
+  // stats strip
+  const strip = document.getElementById('tr-stats-strip-p');
+  if (strip) {
+    // last cell = contract duration, always shown
+    const cells = [
+      ...trStats.map(s => ({val: s.val, lbl: s.lbl})),
+    ].slice(0,4);
+    // override last cell with contract duration
+    if (cells.length === 4) { cells[3] = {val: v('tr-duration')||'3 ANS', lbl:'CONTRAT'}; }
+    strip.innerHTML = cells.map(c => `
+      <div class="tr-stat-cell">
+        <div class="tr-stat-val" style="color:${col};text-shadow:0 0 8px rgba(${colR},0.4)">${c.val}</div>
+        <div class="tr-stat-lbl">${c.lbl}</div>
+      </div>`).join('');
   }
 
-  // details
-  const ageEl = document.getElementById('tr-age-p');
-  if (ageEl) { ageEl.textContent = v('tr-age') || '24 ANS'; ageEl.style.color = col; }
-  const nationEl = document.getElementById('tr-nation-p');
-  if (nationEl) { nationEl.textContent = v('tr-nation') || '🇲🇦 MAROC'; nationEl.style.color = '#fff'; }
-  const durEl = document.getElementById('tr-duration-p');
-  if (durEl) { durEl.textContent = v('tr-duration') || '3 ANS'; durEl.style.color = col; }
-  // details grid dividers
-  document.querySelectorAll('.tr-detail-lbl').forEach(el => el.style.color = 'rgba(255,255,255,0.35)');
-
-  // sync type buttons active state
+  // sync type buttons
   ['in','out','loan'].forEach(t => {
     const btn = document.getElementById('tr-btn-'+t);
     if (btn) btn.classList.toggle('active', t === transferType);
@@ -2010,62 +2053,56 @@ async function animStarting6() {
 }
 
 // ══════════════════════════════════════════════════════════
-// TRANSFER ANNOUNCEMENT
+// TRANSFER WINDOW — OFFICIAL
 // ══════════════════════════════════════════════════════════
 async function animTransfer() {
   const g = id => document.getElementById(id);
 
   hideAll([
-    g('tr-league-p'), g('tr-type-badge-p'),
-    g('tr-stamp-p'), g('tr-stamp-sub-p'),
-    g('tr-photo-wrap'),
-    g('tr-firstname-p'), g('tr-lastname-p'), g('tr-num-p'),
-    g('tr-from-p'), g('tr-to-p'), g('tr-arrow-p'), g('tr-fee-tag-p'),
-    ...document.querySelectorAll('.tr-club-label'),
-    ...document.querySelectorAll('.tr-detail-cell')
+    g('tr-chrome'), g('tr-window-tag'),
+    g('tr-photo-section'),
+    g('tr-firstname-p'), g('tr-lastname-p'),
+    g('tr-pos-pill'), g('tr-nat-pill'),
+    g('tr-move-row') || document.querySelector('#slide-transfer .tr-move-row'),
+    ...document.querySelectorAll('#slide-transfer .tr-stat-cell'),
   ]);
 
-  // Whole slide fades from black
   g('slide-transfer').style.opacity = '0';
-  g('slide-transfer').style.transition = 'opacity 1.4s ease';
+  g('slide-transfer').style.transition = 'opacity 1.0s ease';
   await wait(100);
   g('slide-transfer').style.opacity = '1';
-  await wait(500);
+  await wait(400);
 
-  // 1. Topbar — league + badge
-  reveal(g('tr-league-p'),    'anim-fade-down', 0);
-  reveal(g('tr-type-badge-p'),'anim-neon-flicker', 250);
+  // 1. Chrome top bar slides down
+  reveal(g('tr-chrome'), 'anim-fade-down', 0);
+  await wait(600);
+
+  // 2. Photo section rises up — the big reveal
+  reveal(g('tr-photo-section'), 'anim-fade-up', 0);
   await wait(900);
 
-  // 2. Big stamp — the cinematic centerpiece
-  reveal(g('tr-stamp-p'),     'anim-score-pop', 0);
-  reveal(g('tr-stamp-sub-p'), 'anim-fade-up',   500);
-  await wait(1400);
+  // 3. Firstname fades in
+  reveal(g('tr-firstname-p'), 'anim-fade-up', 0);
+  await wait(300);
 
-  // 3. Photo rises up from below
-  reveal(g('tr-photo-wrap'),  'anim-fade-up', 0);
+  // 4. Lastname — the main impact
+  reveal(g('tr-lastname-p'), 'anim-score-pop', 0);
   await wait(1000);
 
-  // 4. Name — firstname then lastname
-  reveal(g('tr-firstname-p'), 'anim-fade-up', 0);
-  await wait(250);
-  reveal(g('tr-lastname-p'),  'anim-fade-up', 0);
-  await wait(350);
-  reveal(g('tr-num-p'),       'anim-fade-up', 0);
+  // 5. Position + nationality pills
+  reveal(g('tr-pos-pill'),  'anim-fade-left',  0);
+  reveal(g('tr-nat-pill'),  'anim-fade-right', 150);
   await wait(900);
 
-  // 5. Clubs row — from left, arrow, to right
-  document.querySelectorAll('.tr-club-label').forEach(el => reveal(el, 'anim-fade-up', 0));
-  reveal(g('tr-from-p'),    'anim-fade-right', 150);
-  reveal(g('tr-arrow-p'),   'anim-scale-in',   350);
-  reveal(g('tr-to-p'),      'anim-fade-left',  150);
-  reveal(g('tr-fee-tag-p'), 'anim-neon-flicker', 500);
-  await wait(1200);
+  // 6. Club move row — the key data
+  const moveRow = document.querySelector('#slide-transfer .tr-move-row');
+  reveal(moveRow, 'anim-card-reveal', 0);
+  await wait(1000);
 
-  // 6. Details grid — three cells cascade
-  document.querySelectorAll('.tr-detail-cell').forEach((el, i) =>
-    reveal(el, 'anim-card-reveal', i * 280));
-  await wait(1400);
+  // 7. Stats strip — cells one by one
+  document.querySelectorAll('#slide-transfer .tr-stat-cell').forEach((el, i) =>
+    reveal(el, 'anim-fade-up', i * 200));
+  await wait(1200);
 }
 // ════════════════════════════════════════════════════════════
 </script>
